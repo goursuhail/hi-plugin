@@ -269,12 +269,7 @@ function student_city_field_cb($args){
 
     <?php
 }
-?>
 
-
-
-// Top level menu
-<?php
 function student_option_page(){
 
     add_menu_page(
@@ -328,7 +323,6 @@ function student_option_page_cb(){
             ?>
         </form>
     </div>
-
 
 <?php
 

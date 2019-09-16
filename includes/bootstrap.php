@@ -16,7 +16,12 @@ class Plugin{
 
     function my_enqueue_script(){
 
+        $arr = [
+          'ajaxurl' => admin_url('admin-ajax.php')
+        ];
+
         wp_enqueue_script('myjs', HIP_URL.'/assets/js/myhip'.HIP_SCRIPT_SUFFIX.'.js', ['jquery', 'jquery-color'], HIP_VERSION, true);
+        wp_localize_script('myjs', 'obj', $arr);
 
         wp_enqueue_style('mycss', HIP_URL.'/assets/css/myhip'.HIP_SCRIPT_SUFFIX.'.css', HIP_VERSION);
 
@@ -97,6 +102,7 @@ class Plugin{
         require_once HIP_PATH.'/includes/setting.php';
         require_once HIP_PATH.'/includes/setting-test.php';
         require_once HIP_PATH.'/includes/ajax.php';
+        require_once HIP_PATH.'/includes/category-template.php';
     }
 
 

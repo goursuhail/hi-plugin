@@ -6,7 +6,37 @@ class Ajax{
     {
 
         add_shortcode('AJAXCODE', [$this, 'ajaxfunction']);
-        add_action();
+
+        add_action('wp_ajax_hi_calc', [ $this, 'calc']);
+        add_action('wp_ajax_nopriv_hi_calc', [ $this, 'calc']);
+
+    }
+
+    function calc(){
+
+       $operator = $_POST['choose'];
+       $result = '';
+       switch ($operator){
+
+           case 'add':
+               $result = $_POST['no1'] + $_POST['no2'];
+
+               break;
+           case 'subtract':
+               $result = $_POST['no1'] - $_POST['no2'];
+
+               break;
+           case 'multiply':
+               $result = $_POST['no1'] * $_POST['no2'];
+
+               break;
+           case 'division':
+               $result = $_POST['no1'] / $_POST['no2'];
+
+               break;
+       }
+
+        wp_send_json($result);
     }
 
 
@@ -30,7 +60,7 @@ class Ajax{
                 </select>
             </div>
             <div>
-                <button>Submit</button>
+                <button id="ajax-submit">Submit</button>
             </div>
             <div>
                 <input id="xyz" type="text" name="val">
