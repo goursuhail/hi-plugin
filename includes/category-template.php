@@ -5,7 +5,48 @@ class Category{
     function __construct()
     {
         add_shortcode('WORLDTOUR', [$this, 'dropdown_category_ajax']);
+        add_action('wp_ajax_hi_cate', [$this, 'ajax_category']);
+        add_action('wp_ajax_nopriv_hi_cate', [$this, 'ajax_category']);
     }
+
+    function ajax_category(){
+
+        $cat_id = $_POST['select'];
+        
+        $args = array (
+            'cat' => $cat_id,
+            'posts_per_page' => 3,
+            'order' => 'DESC'
+        );
+
+
+        $posts = get_posts( $args );
+
+        ob_start ();
+
+        foreach ( $posts as $post ) {
+            global $post;
+            setup_postdata( $post ); ?>
+
+            <div id="post-<?php echo $post->ID; ?> <?php post_class(); ?>">
+                <h3 class="posttitle"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+
+                <div id="post-content">
+                    <?php the_excerpt(); ?>
+                </div>
+
+            </div>
+
+        <?php } wp_reset_postdata();
+
+        $response = ob_get_contents();
+        ob_end_clean();
+
+        wp_send_json($response);
+    }
+
+
+
 
 
     function dropdown_category_ajax(){

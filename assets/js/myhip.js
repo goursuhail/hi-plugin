@@ -28,13 +28,17 @@ $(document).ready(function () {
 
     $("#btn-submit").click(function () {
        $.ajax({
-         method: "GET",
+         method: "POST",
            url: obj.ajaxurl,
-           dataType: "text",
+           dataType: "json",
            data: {
              select: jQuery('#cat').val(),
-           }
-
+               action: 'hi_cate'
+           },
+            success: function (result) {
+                console.log(result);
+                jQuery('#category-post').html(result);
+            }
        });
     });
 });
