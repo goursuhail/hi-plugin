@@ -80,7 +80,9 @@ class Category{
         <div id="category-drop">
                 <?php wp_dropdown_categories( $args ); ?>
             <button id="btn-submit">View</button>
-
+            <div class="preloader">
+            <img src="<?php echo HIP_URL.'/assets/img/loader.gif'; ?>">
+            </div>
         </div>
         <div id="category-post">
 

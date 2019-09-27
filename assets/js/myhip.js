@@ -26,11 +26,17 @@ console.log(obj.ajaxurl);
 
 $(document).ready(function () {
 
+
     $("#btn-submit").click(function () {
        $.ajax({
          method: "POST",
+           beforeSend: function(){
+               $('.preloader').css('visibility', 'visible');
+
+           },
            url: obj.ajaxurl,
            dataType: "json",
+
            data: {
              select: jQuery('#cat').val(),
                action: 'hi_cate'
@@ -38,6 +44,10 @@ $(document).ready(function () {
             success: function (result) {
                 console.log(result);
                 jQuery('#category-post').html(result);
+            },
+
+            complete: function () {
+                $('.preloader').css('visibility', 'hidden');
             }
        });
     });

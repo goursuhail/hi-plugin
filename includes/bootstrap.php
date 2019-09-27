@@ -6,7 +6,7 @@ class Plugin{
     function __construct()
     {
         add_action('wp_enqueue_scripts', [$this, 'my_enqueue_script'] );
-
+        add_action( 'after_setup_theme', [$this , 'crb_load'] );
         add_shortcode('AJMERCODE', [$this, 'worldfunction']);
 
         $this->includes();
@@ -25,6 +25,11 @@ class Plugin{
 
         wp_enqueue_style('mycss', HIP_URL.'/assets/css/myhip'.HIP_SCRIPT_SUFFIX.'.css', HIP_VERSION);
 
+    }
+
+    function crb_load() {
+        require_once( HIP_PATH.'vendor/autoload.php' );
+        \Carbon_Fields\Carbon_Fields::boot();
     }
 
     function worldfunction($atts){
@@ -103,6 +108,8 @@ class Plugin{
         require_once HIP_PATH.'/includes/setting-test.php';
         require_once HIP_PATH.'/includes/ajax.php';
         require_once HIP_PATH.'/includes/category-template.php';
+        require_once HIP_PATH.'/includes/custom-field.php';
+        require_once HIP_PATH.'/includes/custom-setting.php';
     }
 
 
