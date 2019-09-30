@@ -110,6 +110,9 @@ class Plugin{
         require_once HIP_PATH.'/includes/category-template.php';
         require_once HIP_PATH.'/includes/custom-field.php';
         require_once HIP_PATH.'/includes/custom-setting.php';
+        require_once HIP_PATH.'/includes/comment-meta.php';
+        require_once HIP_PATH.'/includes/term-meta.php';
+        require_once HIP_PATH.'/includes/nav-menu-item.php';
     }
 
 

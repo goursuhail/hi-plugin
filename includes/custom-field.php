@@ -13,6 +13,8 @@ class my_custom_field {
     public function my_post_custom_fields(){
         Container::make( 'post_meta', 'Custom Data' )
             ->where( 'post_type', '=', 'page' )
+            ->set_context('normal')
+            ->set_priority('core')
             ->add_fields( array(
                 Field::make( 'text', 'extra_field' , __('Extra Field') ),
                 Field::make( 'file', 'my_file' , __('Extra File') ),
